@@ -28,7 +28,7 @@ const Login = () => {
         <div className='flex w-full mb-3' >
           <p className='text-purple-800 text-[14px] px-3 cursor-pointer'>Forgot Password?</p>
         </div> }
-        <button className='rounded-2xl px-18 py-1 bg-purple-800 text-white cursor-pointer hover:scale-110 transition-all duration-300
+        <button className='rounded-2xl px-18 py-1 mt-3 bg-purple-800 text-white cursor-pointer hover:scale-110 transition-all duration-300
         active:scale-95 mb-3'>{isLogin ? 'Login' : 'Sign Up'}</button>
         {isLogin ? (
           <p className='text-sm text-purple-800' onClick={() => setIsLogin(false)}>Don't have an account? <span className='cursor-pointer hover:text-white'>SignUp</span></p>
