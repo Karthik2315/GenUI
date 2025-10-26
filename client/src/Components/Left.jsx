@@ -12,7 +12,7 @@ const Left = () => {
       <p className='text-[15px] mt-1 bg-gradient-to-r from-[#F7F8F8] to-[#ACBB78] bg-clip-text text-transparent'>Describe your Component and let AI code for you.</p>
     <p className='font-semibold mt-3 text-[18px] bg-gradient-to-r from-[#F7F8F8] to-[#FBBF24] bg-clip-text text-transparent'>FrameWork</p>
     <select
-          className="block w-full mt-2 px-4 py-2 pr-10 text-gray-800 bg-[#203A43] text-white
+          className="border-3 border-white block w-full mt-2 px-4 py-2 pr-10 text-gray-800 bg-[#203A43] text-white
                rounded-md shadow-sm appearance-none focus:outline-none">
       <option value="html-css">HTML + CSS</option>
       <option value="html-tailwind">HTML + Tailwind</option>
