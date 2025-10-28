@@ -8,7 +8,8 @@ import Editor from '@monaco-editor/react';
 
 const Home = () => {
   const navigate = useNavigate();
-  const [outputScreen,setOutputScreen] = useState(true);
+  const [outputScreen,setOutputScreen] = useState(false);
+  const [code,setCode] = useState("");
   useEffect(()=>{
     const cookies = document.cookie;
     if(cookies.includes("token="))
@@ -21,8 +22,8 @@ const Home = () => {
     <>
       <Navbar />
       <div className='flex justify-between items-center px-[80px] gap-[60px] bg-gradient-to-r from-[#0F2027] via-[#203A43] to-[#2C5364] overflow-y-auto'>
-        <Left />
-        <Right outputScreen={outputScreen} />
+        <Left setOutputScreen={setOutputScreen} setCode={setCode}/>
+        <Right outputScreen={outputScreen} code={code} />
       </div>
     </>
   )
