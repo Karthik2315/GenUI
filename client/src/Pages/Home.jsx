@@ -32,8 +32,8 @@ const Home = () => {
         <h2 className='text-black font-semibold text-[20px]'>Preview</h2>
         <button className='p-2 bg-black text-white rounded-md hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer' onClick={() => removePreview()}><X className='size-5'/></button>
       </div>
-      <div className='h-[90vh] bg-black flex justify-center items-center' >
-        <iframe srcDoc={code}></iframe>
+      <div className='h-[90vh] w-full bg-black flex justify-center items-center' >
+        <iframe srcDoc={code} className='h-full w-full'></iframe>
       </div>
     </>
   ) : (
