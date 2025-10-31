@@ -1,9 +1,9 @@
-import userModel from "../models/UserModal";
+import userModel from "../models/UserModal.js";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken'
 
-const jwtToken = (payload) => {
-  return jwt.sign(payload,process.env.JWT_SECRET,{expiresIn:'1d'});
+const jwtToken = (id) => {
+  return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:'1d'});
 }
 
 export const login = async(req,res) => {
@@ -28,6 +28,7 @@ export const login = async(req,res) => {
     res.cookie("token",jwtToken(user._id),{
       httpOnly:true,
       secure:false,
+      sameSite:'lax',
       maxAge:24*60*60*1000
     })
     return res.status(200).json({
@@ -64,6 +65,7 @@ export const register = async(req,res) => {
     res.cookie("token",jwtToken(newuser._id),{
       httpOnly:true,
       secure:false,
+      sameSite:'lax',
       maxAge:24*60*60*1000
     })
     return res.status(200).json({
@@ -83,7 +85,8 @@ export const logout = async(req,res) => {
   try {
     res.clearCookie("token",{
       httpOnly:true,
-      secure:false
+      secure:false,
+      sameSite:'lax'
     });
     return res.status(200).json({
       success:true,
@@ -97,3 +100,17 @@ export const logout = async(req,res) => {
     });
   }
 }
+
+export const verifyUser = async (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ success: false, message: "No token found" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    return res.status(200).json({ success: true, userId: decoded.id });
+  } catch (error) {
+    return res.status(401).json({ success: false, message: "Invalid or expired token" });
+  }
+};

@@ -5,7 +5,7 @@ import Left from '../Components/Left';
 import Right from '../Components/Right';
 import Editor from '@monaco-editor/react';
 import { X } from 'lucide-react';
-
+import axios from 'axios';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -13,11 +13,18 @@ const Home = () => {
   const [code,setCode] = useState("");
   const [newTab,setNewTab] = useState(false);
   useEffect(()=>{
-    const cookies = document.cookie;
-    if(cookies.includes("token="))
-    {
-      navigate('/login');
-    }
+    const checkAuth = async () => {
+      try {
+        const {data} = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user/verify`,{withCredentials:true});
+        if (!data.success) {
+          navigate('/login');
+        }
+      } catch (err) {
+        console.log(err);
+        navigate('/login');
+      }
+    };
+    checkAuth();
   },[]);
 
   const removePreview = async() => {
